@@ -10,7 +10,7 @@ const router = useRouter()
 const route = useRoute()
 let imgs!: any
 function goHello ():void {
-  imgs = () => import('@/assets/vue.svg')!
+  // imgs = () => import('@/assets/vue.svg')!
   console.log(imgs)
   router.push({path: 'demo'})
 }
