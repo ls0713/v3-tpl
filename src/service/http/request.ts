@@ -1,5 +1,5 @@
 import axios from './interceptors'
-import qs from 'qs'
+// import qs from 'qs'
 
 interface REQUEST {
   url: string
@@ -17,7 +17,7 @@ export const GET = <T>(params: REQUEST): Promise<T> => {
   return axios({
     method: 'get',
     url: params.url,
-    params: qs.stringify(params.data)
+    params: params.data
   })
 }
 
