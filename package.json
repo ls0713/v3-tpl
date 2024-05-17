@@ -41,9 +41,6 @@
     "vite": "^4.1.0",
     "vue-tsc": "^1.0.24"
   },
-  "engines": {
-    "node": "18.16.0"
-  },
   "lint-staged": {
     "*.{ts,vue,js}": "eslint --fix"
   },
