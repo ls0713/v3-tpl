@@ -7,7 +7,7 @@ interface response {
 }
 Axios.defaults.timeout = 1500
 
-Axios.defaults.baseURL = process.env.VITE_BASE_URL
+Axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 
 Axios.interceptors.request.use(function <T>(config: T):T {
   return config
