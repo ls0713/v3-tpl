@@ -9,13 +9,25 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 
+
 export default defineConfig({
+  base: './',
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag === 'webview'
+        }
+      }
+    }),
     AutoImport({
       imports: ['vue'],
       resolvers: [
-        ElementPlusResolver(),
+        ElementPlusResolver(
+          {
+            importStyle: false
+          }
+        ),
         IconResolver({
           prefix: 'Icon'
         })
@@ -28,7 +40,11 @@ export default defineConfig({
           prefix: 'Icon',
           enabledCollections: ['ep'],
         }),
-        ElementPlusResolver()
+        ElementPlusResolver(
+          {
+            importStyle: false
+          }
+        )
       ],
       dts: path.resolve(path.resolve(__dirname, 'src'), 'components.d.ts'),
     }),
@@ -42,8 +58,6 @@ export default defineConfig({
     }
   },
   build: {
-    // assetsDir: 'assets'
-    // outDir: 'ls',
     minify: 'terser',
     terserOptions: {
       compress: {
