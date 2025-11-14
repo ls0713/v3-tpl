@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 import vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
@@ -8,9 +8,12 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
+import { readFileSync } from 'fs'
 
+// 读取 package.json
+const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'))
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   base: './',
   plugins: [
     vue({
@@ -50,7 +53,17 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true
-    })
+    }),
+    // 自定义插件：注入 package.json 的 name 到 index.html
+    {
+      name: 'html-transform',
+      transformIndexHtml(html) {
+        return html.replace(
+          /<title>(.*?)<\/title>/,
+          `<title>${pkg.name}</title>`
+        )
+      }
+    }
   ],
   resolve: {
     alias: {
@@ -73,4 +86,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))
