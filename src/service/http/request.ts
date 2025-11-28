@@ -24,6 +24,6 @@ export const GET = <T>(params: REQUEST): Promise<T> => {
 export const PUT = <T>(params: REQUEST): Promise<T> => {
   return axios({
     method: 'put',
-    url: `${params.url}/${params.data!.id}`
+    ...params
   })
 }
