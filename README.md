@@ -153,13 +153,13 @@ import MyComponent from '@/components/MyComponent.vue'
 使用封装好的 Axios 实例：
 
 ```typescript
-import { request } from '@/service'
+import { POST, GET, PUT } from '@/service'
 
 // GET 请求
-const data = await request.get('/api/users')
+const data = await GET('/api/users')
 
 // POST 请求
-const result = await request.post('/api/users', { name: 'John' })
+const result = await POST('/api/users', { name: 'John' })
 ```
 
 ### 状态管理
