@@ -11,14 +11,13 @@ Axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 
 Axios.interceptors.request.use(function <T>(config: T):T {
   return config
-}, function (error):Promise<any> {
+}, function (error: any):Promise<any> {
   return Promise.reject(error)
 })
 
-Axios.interceptors.response.use((response) => {
+Axios.interceptors.response.use((response: {data: {[x:string]: any}}) => {
   return response
-},function (error) {
-  console.log(error, '============')
+},function (error: any) {
   return Promise.reject(error)
 })
 
